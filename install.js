@@ -2,29 +2,29 @@
 
 const sqlite3 = require("sqlite3");
 
-const db = new sqlite3.Database("./db/db.sqlite");
+const db = new sqlite3.Database("./db/cv.db");
 
 db.serialize(()=>{
 
-    db.run("DROP TABLE IF EXISTS courses")
+    db.run("DROP TABLE IF EXISTS workexperience")
 
     db.run(`
-        CREATE TABLE courses (
+        CREATE TABLE IF NOT EXISTS workexperience (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            coursecode TEXT NOT NULL UNIQUE,
-            coursename TEXT NOT NULL,
-            syllabus TEXT NOT NULL,
-            progression TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
+            companyname TEXT NOT NULL,
+            jobtitle TEXT NOT NULL,
+            location TEXT NOT NULL,
+            startdate TEXT NOT NULL,
+            enddate TEXT NOT NULL,
+            description TEXT NOT NULL
+        )
     `);
 
     db.run(`
-        INSERT INTO courses (coursecode, coursename, syllabus, progression)
+        INSERT INTO workexperience (companyname, jobtitle, location, startdate, enddate, description)
         VALUES 
-        ('DT207G', 'Backend-baserad webbutveckling', 'https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT207G/', 'B'),
-        ('DT084G', 'Introduktion till programmering i JavaScript', 'https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT084G/', 'A'),
-        ('DT200G', 'Grafisk teknik för webb', 'https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT200G/', 'B')
+        ('ICA', 'Ägare', 'Hemma', '2000-01-01', '2012-12-12', 'Hemma på min gata i staaaan...'),
+        ('Stugan', 'Kapten', 'Taket', '2022-01-01', '2033-12-12', 'Världens bästa karlsson...')
     `);
 
 });

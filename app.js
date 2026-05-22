@@ -1,4 +1,5 @@
 const express = require('express');
+const sqlite3 = require("sqlite3");
 const cors = require('cors');
 
 const app = express();
@@ -6,6 +7,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
+
+const db = new sqlite3.Database("./db/cv.db");
 
 app.get('/api', (req, res) => {
     res.json({ message: 'Welcome to my REST API' });
