@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(cors({
-    origin: "https://https://dt207-2-sini2500.netlify.app/"
+    origin: "https://https://dt207-2-2-sini2500.netlify.app/"
 }));
 
 const db = new sqlite3.Database("./db/cv.db");
